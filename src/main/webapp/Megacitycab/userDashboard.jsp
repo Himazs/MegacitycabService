@@ -745,24 +745,21 @@
                 </ul>
             </div>
             <div class="footer-column">
-                <h3>COMPANY INFO</h3>
+                <h3>User Info</h3>
                 <ul>
-                    <li><a href="home.jsp">home</a></li>
-                    <li><a href="#">about</a></li>
                     <li><a href="userprofile.jsp">profile</a></li>
-                    <li><a href="booking.jsp">booking</a></li>
-                    <li><a href="userhelp.jsp">help</a></li>
-                    <li><a href="contact.jsp">contact</a></li>
+                    <li><a href="recentTrips.jsp">Recent Trips</a></li>
+                    <li><a href="userHelps.jsp">help Details</a></li>
                     <li><a href="logout.jsp">logout</a></li>
                 </ul>
             </div>
             <div class="footer-column social-column">
                 <h3>FOLLOW US</h3>
                 <ul>
-                    <li><a href="https://www.facebook.com/profile.php?id=100093469936738&mibextid=ZbWKwL" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                    <li><a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="https://www.twitter.com"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="https://www.Linkendin.com"><i class="fab fa-linkedin-in"></i></a></li>
                 </ul>
             </div>
         </div>

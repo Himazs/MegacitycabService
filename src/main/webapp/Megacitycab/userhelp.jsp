@@ -191,7 +191,7 @@
             <option value="payment">Payment Issue</option>
             <option value="gps">GPS/App Failure</option>
             <option value="client">driver Issue</option>
-                    <option value="Other">Other</option>
+                    
                 </select><br>
                 <input type="submit" value="Submit Help Request">
             </form>

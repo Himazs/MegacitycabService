@@ -16,7 +16,7 @@
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-               background-image: url(images/back.png);
+            background-image: url(images/back.png);
             color: #333;
         }
 
@@ -27,6 +27,7 @@
             text-align: center;
             color: white;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
         .header h1 {
@@ -35,7 +36,26 @@
             text-transform: uppercase;
         }
 
-        .container {
+        .faq-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #ff9100;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .faq-btn:hover {
+            background-color: #e07b00;
+        }
+
+         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
@@ -140,8 +160,10 @@
 <body>
     <header class="header">
         <h1>CONTACT US</h1>
+        <a href="faq.jsp" class="faq-btn">FAQ</a>
     </header>
-<br><br><br>
+    
+    <br><br><br>
     <div class="container">
         <div class="contact-form">
             <h2>Get in Touch</h2>
@@ -187,7 +209,5 @@
             <p><strong>Inquiries on Affiliations (Driver or Fleet Owner)</strong><br> +94 114 507 555<br> registration@megacitycab.lk</p>
         </div>
     </div>
-
-    <img src="https://via.placeholder.com/100" alt="Car Icon" class="car-icon">
 </body>
 </html>

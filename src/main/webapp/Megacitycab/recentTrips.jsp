@@ -1,10 +1,11 @@
-<%@ page import="java.sql.*" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*, java.text.SimpleDateFormat" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>User Help Details</title>
+    <meta charset="UTF-8">
+    <title>MegaCityCab - Recent Trips</title>
     <style>
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -72,21 +73,6 @@
             background-color: #f5f5f5;
         }
 
-        .action-btn {
-            background-color: #d32f2f;
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            margin-right: 5px;
-        }
-        
-        .action-btn:hover {
-            background-color: #b71c1c;
-        }
-
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -147,6 +133,22 @@
             text-align: center;
             font-weight: bold;
         }
+
+        .no-data {
+            text-align: center;
+            color: #666;
+            font-weight: 500;
+            font-size: 18px;
+            padding: 20px;
+        }
+
+        .error-message {
+            text-align: center;
+            color: #d32f2f;
+            font-weight: 500;
+            font-size: 18px;
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
@@ -159,86 +161,95 @@
     <div class="modal-overlay" id="userIdModal">
         <div class="modal-content">
             <div class="modal-title">Enter User ID</div>
-            <form action="userHelps.jsp" method="get">
+            <form action="recentTrips.jsp" method="get">
                 <input type="text" name="userid" class="modal-input" placeholder="Enter User ID" required autofocus>
-                <button type="submit" class="modal-button">View Details</button>
+                <button type="submit" class="modal-button">View Trips</button>
             </form>
         </div>
     </div>
     <% } else { %>
     <div class="container">
         <div class="box">
-            <h2>User Help Table Details</h2>
-            <div class="user-title">Showing help requests for User ID: <%= userId %></div>
+            <h2>MegaCityCab - Recent Trips</h2>
+            <div class="user-title">Showing recent trips for User ID: <%= userId %></div>
             
             <table>
                 <tr>
                     <th>ID</th>
-                    <th>Booking ID</th>
-                    <th>Issue Type</th>
-                    <th>Submission Timestamp</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Pickup Location</th>
+                    <th>Drop Location</th>
+                    <th>Car Type</th>
+                    <th>Booking Timestamp</th>
+                    <th>Status</th>
                     <th>User ID</th>
-                    <th>Action</th>
+                    <th>Driver ID</th>
+                    <th>Driver Name</th>
                 </tr>
                 <%
-                    String url = "jdbc:mysql://localhost:3306/megacitycab";
-                    String username = "root";
-                    String password = "Himas123@#";
-                    
                     Connection conn = null;
                     PreparedStatement pstmt = null;
                     ResultSet rs = null;
                     
                     try {
-                        Class.forName("com.mysql.cj.jdbc.Driver");
-                        conn = DriverManager.getConnection(url, username, password);
+                        Class.forName("com.mysql.jdbc.Driver");
+                        String url = "jdbc:mysql://localhost:3306/megacitycab?useSSL=false";
+                        conn = DriverManager.getConnection(url, "root", "Himas123@#");
                         
-                        String sql = "SELECT * FROM userhelp WHERE userid = ?";
+                        String sql = "SELECT * FROM cab_bookings WHERE userId = ? ORDER BY booking_timestamp DESC";
                         pstmt = conn.prepareStatement(sql);
                         pstmt.setString(1, userId);
                         rs = pstmt.executeQuery();
                         
-                        boolean hasData = false;
+                        boolean hasBookings = false;
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        
                         while (rs.next()) {
-                            hasData = true;
+                            hasBookings = true;
                             int id = rs.getInt("id");
-                            int bookingId = rs.getInt("booking_id");
-                            String issueType = rs.getString("issue_type") != null ? rs.getString("issue_type") : "";
-                            Timestamp submissionTimestamp = rs.getTimestamp("submission_timestamp");
-                            String userIdDb = rs.getString("userid") != null ? rs.getString("userid") : "";
+                            String name = rs.getString("name");
+                            String phone = rs.getString("phone");
+                            String pickupLocation = rs.getString("pickup_location");
+                            String dropLocation = rs.getString("drop_location");
+                            String carType = rs.getString("car_type");
+                            Timestamp bookingTimestamp = rs.getTimestamp("booking_timestamp");
+                            String status = rs.getString("status");
+                            String userIdDb = rs.getString("userId");
+                            String driverId = rs.getString("driver_id");
+                            String driverName = rs.getString("driver_name");
                 %>
                 <tr>
                     <td><%= id %></td>
-                    <td><%= bookingId %></td>
-                    <td><%= issueType %></td>
-                    <td><%= (submissionTimestamp != null) ? submissionTimestamp : "" %></td>
-                    <td><%= userIdDb %></td>
-                    <td>
-                        <form action="removeUserHelp.jsp" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to remove this record?');">
-                            <input type="hidden" name="id" value="<%= id %>">
-                            <input type="hidden" name="userid" value="<%= userId %>">
-                            <button type="submit" class="action-btn">Delete</button>
-                        </form>
-                    </td>
+                    <td><%= name != null ? name : "N/A" %></td>
+                    <td><%= phone != null ? phone : "N/A" %></td>
+                    <td><%= pickupLocation != null ? pickupLocation : "N/A" %></td>
+                    <td><%= dropLocation != null ? dropLocation : "N/A" %></td>
+                    <td><%= carType != null ? carType : "N/A" %></td>
+                    <td><%= bookingTimestamp != null ? sdf.format(bookingTimestamp) : "N/A" %></td>
+                    <td><%= status != null ? status : "N/A" %></td>
+                    <td><%= userIdDb != null ? userIdDb : "N/A" %></td>
+                    <td><%= driverId != null ? driverId : "N/A" %></td>
+                    <td><%= driverName != null ? driverName : "N/A" %></td>
                 </tr>
                 <%
                         }
-                        if (!hasData) {
+                        if (!hasBookings) {
                 %>
                 <tr>
-                    <td colspan="6" class="no-data">No user help records available for User ID: <%= userId %></td>
+                    <td colspan="11" class="no-data">No trip records available for User ID: <%= userId %></td>
                 </tr>
                 <%
                         }
                     } catch (Exception e) {
-                        out.println("<tr><td colspan='6' class='error-message'>Error: " + e.getMessage() + "</td></tr>");
+                        out.println("<tr><td colspan='11' class='error-message'>Error: " + e.getMessage() + "</td></tr>");
                     } finally {
                         try {
                             if (rs != null) rs.close();
                             if (pstmt != null) pstmt.close();
                             if (conn != null) conn.close();
                         } catch (SQLException e) {
-                            out.println("<tr><td colspan='6' class='error-message'>Error closing connection: " + e.getMessage() + "</td></tr>");
+                            out.println("<tr><td colspan='11' class='error-message'>Error closing connection: " + e.getMessage() + "</td></tr>");
                         }
                     }
                 %>

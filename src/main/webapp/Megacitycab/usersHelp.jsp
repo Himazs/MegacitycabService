@@ -72,7 +72,7 @@
             background-color: #f5f5f5;
         }
 
-        .action-btn {
+        .remove-btn {
             background-color: #d32f2f;
             color: white;
             border: none;
@@ -80,10 +80,9 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 14px;
-            margin-right: 5px;
         }
         
-        .action-btn:hover {
+        .remove-btn:hover {
             background-color: #b71c1c;
         }
 
@@ -147,6 +146,17 @@
             text-align: center;
             font-weight: bold;
         }
+
+        .no-data {
+            text-align: center;
+            font-style: italic;
+            color: #888;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -159,7 +169,7 @@
     <div class="modal-overlay" id="userIdModal">
         <div class="modal-content">
             <div class="modal-title">Enter User ID</div>
-            <form action="userHelps.jsp" method="get">
+            <form action="userHelp.jsp" method="get">
                 <input type="text" name="userid" class="modal-input" placeholder="Enter User ID" required autofocus>
                 <button type="submit" class="modal-button">View Details</button>
             </form>
@@ -214,10 +224,9 @@
                     <td><%= (submissionTimestamp != null) ? submissionTimestamp : "" %></td>
                     <td><%= userIdDb %></td>
                     <td>
-                        <form action="removeUserHelp.jsp" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to remove this record?');">
+                        <form action="removeUserHelp.jsp" method="post" onsubmit="return confirm('Are you sure you want to remove this record?');">
                             <input type="hidden" name="id" value="<%= id %>">
-                            <input type="hidden" name="userid" value="<%= userId %>">
-                            <button type="submit" class="action-btn">Delete</button>
+                            <button type="submit" class="remove-btn">Remove</button>
                         </form>
                     </td>
                 </tr>
@@ -243,8 +252,10 @@
                     }
                 %>
             </table>
-            
-           
+
+            <div style="text-align: center; margin-top: 20px;">
+                <a href=http://localhost:8080/Citycab/Megacitycab/usersHelp.jsp" style="display: inline-block; padding: 10px 20px; background-color: #1a73e8; color: white; text-decoration: none; border-radius: 6px;">Enter Different User ID</a>
+            </div>
         </div>
     </div>
     <% } %>

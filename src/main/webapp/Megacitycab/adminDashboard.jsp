@@ -120,6 +120,7 @@
             <li><a href="driverHelps.jsp" target="contentFrame"><i class="fas fa-question-circle"></i> Driver Help Manage</a></li>
             <li><a href="feedbackdetail.jsp" target="contentFrame"><i class="fas fa-comments"></i> Feedback Manage</a></li>
             <li><a href="bookingmanage.jsp" target="contentFrame"><i class="fas fa-book"></i> Bookings Manage</a></li>
+              <li><a href="contactmanage.jsp" target="contentFrame"><i class="fas fa-users"></i> Contact Manage</a></li>
             <li>
                 <a href="logout.jsp" class="logout-btn" onclick="return confirmLogout();">
                     <i class="fas fa-sign-out-alt"></i> Logout
