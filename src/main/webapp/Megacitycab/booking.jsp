@@ -190,11 +190,14 @@
 <body>
     <header class="header">
         <a href="#" id="logo"><img src="images/logo.png" alt="Mega City Cab Logo"></a>
-        <nav class="navbar">
-            <a href="userDashboard.jsp">home</a>
+        
+         <nav class="navbar">
+            <a href="home.jsp">home</a>
+            <a href="UserProfile.jsp">profile</a>
             <a href="bookinghelp.jsp">help</a>
-            <a href="logout.jsp">logout</a>
             <a href="contact.jsp">contact</a>
+            <a href="https://www.google.lk/maps/dir///@7.5181786,79.9864042,13z?hl=en&entry=ttu&g_ep=EgoyMDI1MDMwNC4wIKXMDSoASAFQAw%3D%3D">Map</a>
+            <a href="logout.jsp">logout</a>
         </nav>
     </header>
 

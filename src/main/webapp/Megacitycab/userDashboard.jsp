@@ -580,10 +580,11 @@
         <nav class="navbar">
             <a href="home.jsp">home</a>
             <a href="#">about</a>
-            <a href="userprofile.jsp">profile</a>
+            <a href="UserProfile.jsp">profile</a>
             <a href="booking.jsp">booking</a>
             <a href="userhelp.jsp">help</a>
             <a href="contact.jsp">contact</a>
+            <a href="https://www.google.lk/maps/dir///@7.5181786,79.9864042,13z?hl=en&entry=ttu&g_ep=EgoyMDI1MDMwNC4wIKXMDSoASAFQAw%3D%3D">Map</a>
             <a href="logout.jsp">logout</a>
         </nav>
         <a href="#" id="menu-bars" class="fas fa-bars"></a>
@@ -612,19 +613,19 @@
         <h1>Book a Cab</h1>
       <form id="CabBookingForm" action="<%=request.getContextPath()%>/CabBookingServlet" method="post" onsubmit="return handleFormSubmit(event, 'CabBookingForm')">
     <div class="form-fields">
-        <input type="text" id="userid" name="userid" placeholder="User_Id" required>
-        <input type="text" id="name" name="name" placeholder="Name" required>
-        <input type="text" id="phone" name="phone" placeholder="Phone" required>
-        <input type="text" id="pickup" name="pickup" placeholder="Pickup Location (Colombo)" required>
-        <input type="text" id="drop" name="drop" placeholder="Drop Location (Colombo)" required>
-        <select id="carType" name="carType" required>
-         <option value="">Select Class</option>
-            <option value="standard">Economic Class Ride</option>
-            <option value="premium">Premium Class Ride</option>
-            <option value="executive">Executive Class Ride</option>
-        </select>
-        <button type="submit">Book Now</button>
-    </div>
+                            <input type="text" id="userid" name="userid" placeholder="User_Id" required>
+                            <input type="text" id="name" name="name" placeholder="Name" required>
+                            <input type="text" id="phone" name="phone" placeholder="Phone" required>
+                            <input type="text" id="pickup" name="pickup" placeholder="Pickup Location (Colombo)" required>
+                            <input type="text" id="drop" name="drop" placeholder="Drop Location (Colombo)" required>
+                             <input type="text" id="distance" name="distance" placeholder="Google Maps to calculate the distance." required>
+                            <select id="carType" name="carType" required>
+                                <option value="standard">Economic Class Ride</option>
+                                <option value="premium">Premium Class Ride</option>
+                                <option value="executive">Executive Class Ride</option>
+                            </select>
+                            <button type="submit">Book Now</button>
+                        </div>
 </form>
     </div>
  
@@ -747,9 +748,10 @@
             <div class="footer-column">
                 <h3>User Info</h3>
                 <ul>
-                    <li><a href="userprofile.jsp">profile</a></li>
+                    <li><a href="UserProfile.jsp">profile</a></li>
                     <li><a href="recentTrips.jsp">Recent Trips</a></li>
                     <li><a href="userHelps.jsp">help Details</a></li>
+                    <li><a href="feedbackmanage.jsp">feedbak manage</a></li>
                     <li><a href="logout.jsp">logout</a></li>
                 </ul>
             </div>
