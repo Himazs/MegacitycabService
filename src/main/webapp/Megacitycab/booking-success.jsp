@@ -138,7 +138,11 @@
         <div class="button-group">
             <a href="BookingDetails.jsp" class="btn cancel-btn">Booking Details</a>
             <a href="Bill.jsp" class="btn cancel-btn">Booking Bill</a>
-            <a href="booking.jsp" class="btn btn-primary">Booking Another Ride</a>
+            <a href="paymentgateway.jsp" class="btn btn-primary">Pay Your Bill</a>
+       <a href="CancelBooking.jsp" class="btn btn-primary" style="color: red;">
+    Cancel your Booking
+</a>
+
         </div>
     </div>
 

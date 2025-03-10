@@ -18,7 +18,7 @@
             flex-direction: column;
         }
         .container {
-            max-width: 400px;
+            max-width: 500px;
             background-color: #ffffff;
             padding: 20px;
             border-radius: 12px;
@@ -26,6 +26,37 @@
             border: 1px solid #e0e0e0;
             text-align: center;
             margin-top: 20px;
+        }
+        .input-box {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .btn {
+            background-color: #1a73e8;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #1558b0;
+        }
+        .btn-delete {
+            background-color: red;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn-delete:hover {
+            background-color: darkred;
         }
         .message {
             font-size: 18px;
@@ -38,87 +69,141 @@
         .error {
             color: #d32f2f;
         }
-        a {
-            text-decoration: none;
-            color: #1a73e8;
-            font-weight: bold;
-            font-size: 16px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
         }
-        a:hover {
-            text-decoration: underline;
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <h2>Cancel Booking</h2>
+
         <%
+        // Try to get userId from session (assuming user is logged in and userId is stored in session)
+        String userId = (String) session.getAttribute("userId");
+
+        // If userId is not in session, show the form to input userId
+        if (userId == null || userId.trim().isEmpty()) {
+            // Fallback: Check if userId was submitted via GET request
+            userId = request.getParameter("userId");
+            if (userId == null || userId.trim().isEmpty()) {
+        %>
+                <!-- User ID Input Form -->
+                <form method="GET">
+                    <input type="text" name="userId" class="input-box" placeholder="Enter User ID" required>
+                    <button type="submit" class="btn">Show My Bookings</button>
+                </form>
+        <%
+                return; // Exit early to prevent further rendering
+            }
+        }
+
+        // If userId is available (from session or GET parameter), display bookings
         Connection conn = null;
         PreparedStatement pstmt = null;
-        String message = "";
-        String messageClass = "";
-
+        ResultSet rs = null;
         try {
-            // Get bookingId and userId from the request
-            String bookingId = request.getParameter("bookingId");
-            String userId = request.getParameter("userId");
+            Class.forName("com.mysql.jdbc.Driver");
+            String url = "jdbc:mysql://localhost:3306/megacitycab?useSSL=false";
+            conn = DriverManager.getConnection(url, "root", "Himas123@#");
 
-            if (bookingId == null || bookingId.trim().isEmpty()) {
-                message = "No booking ID provided. Cannot cancel booking.";
-                messageClass = "error";
+            String query = "SELECT id, pickup_location, drop_location, status FROM cab_bookings WHERE userId = ?";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, userId);
+            rs = pstmt.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                out.println("<p class='error'>No bookings found for User ID: " + userId + "</p>");
             } else {
-                // Load the JDBC driver
+        %>
+                <h3>Your Bookings</h3>
+                <table>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Pickup</th>
+                        <th>Dropoff</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+        <%
+                    while (rs.next()) {
+                        int bookingId = rs.getInt("id");
+                        String pickup = rs.getString("pickup_location");
+                        String dropoff = rs.getString("drop_location");
+                        String status = rs.getString("status");
+        %>
+                    <tr>
+                        <td><%= bookingId %></td>
+                        <td><%= pickup %></td>
+                        <td><%= dropoff %></td>
+                        <td><%= status %></td>
+                        <td>
+                            <form method="POST" action="CancelBooking.jsp">
+                                <input type="hidden" name="userId" value="<%= userId %>">
+                                <input type="hidden" name="bookingId" value="<%= bookingId %>">
+                                <button type="submit" class="btn-delete">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+        <%
+                    }
+        %>
+                </table>
+        <%
+            }
+        } catch (Exception e) {
+            out.println("<p class='error'>Error: " + e.getMessage() + "</p>");
+        } finally {
+            try { if (rs != null) rs.close(); if (pstmt != null) pstmt.close(); if (conn != null) conn.close(); }
+            catch (SQLException e) { e.printStackTrace(); }
+        }
+
+        // Handle POST request to cancel a booking
+        String bookingIdToDelete = request.getParameter("bookingId");
+        if (bookingIdToDelete != null) {
+            try {
                 Class.forName("com.mysql.jdbc.Driver");
                 String url = "jdbc:mysql://localhost:3306/megacitycab?useSSL=false";
                 conn = DriverManager.getConnection(url, "root", "Himas123@#");
 
-                // Verify the booking belongs to the user before deletion
-                String verifySql = "SELECT userId FROM cab_bookings WHERE id = ?";
-                PreparedStatement verifyPstmt = conn.prepareStatement(verifySql);
-                verifyPstmt.setInt(1, Integer.parseInt(bookingId));
-                ResultSet rs = verifyPstmt.executeQuery();
+                String checkQuery = "SELECT userId FROM cab_bookings WHERE id = ?";
+                pstmt = conn.prepareStatement(checkQuery);
+                pstmt.setInt(1, Integer.parseInt(bookingIdToDelete));
+                rs = pstmt.executeQuery();
 
-                if (rs.next()) {
-                    String dbUserId = rs.getString("userId");
-                    if (dbUserId != null && dbUserId.equals(userId)) {
-                        // Delete the booking
-                        String deleteSql = "DELETE FROM cab_bookings WHERE id = ?";
-                        pstmt = conn.prepareStatement(deleteSql);
-                        pstmt.setInt(1, Integer.parseInt(bookingId));
-                        int rowsAffected = pstmt.executeUpdate();
+                if (rs.next() && rs.getString("userId").equals(userId)) {
+                    String deleteQuery = "DELETE FROM cab_bookings WHERE id = ?";
+                    pstmt = conn.prepareStatement(deleteQuery);
+                    pstmt.setInt(1, Integer.parseInt(bookingIdToDelete));
+                    int rowsAffected = pstmt.executeUpdate();
 
-                        if (rowsAffected > 0) {
-                            message = "Booking # " + bookingId + " has been successfully canceled.";
-                            messageClass = "success";
-                        } else {
-                            message = "Failed to cancel booking # " + bookingId + ". Please try again.";
-                            messageClass = "error";
-                        }
+                    if (rowsAffected > 0) {
+                        out.println("<p class='success'>Booking ID " + bookingIdToDelete + " has been canceled successfully.</p>");
                     } else {
-                        message = "You are not authorized to cancel this booking.";
-                        messageClass = "error";
+                        out.println("<p class='error'>Failed to cancel Booking ID " + bookingIdToDelete + ".</p>");
                     }
                 } else {
-                    message = "Booking # " + bookingId + " not found.";
-                    messageClass = "error";
+                    out.println("<p class='error'>Unauthorized action or booking not found.</p>");
                 }
-
                 rs.close();
-                if (verifyPstmt != null) verifyPstmt.close();
-            }
-        } catch (Exception e) {
-            message = "An error occurred: " + e.getMessage();
-            messageClass = "error";
-        } finally {
-            try {
-                if (pstmt != null) pstmt.close();
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+                out.println("<p class='error'>Error: " + e.getMessage() + "</p>");
+            } finally {
+                try { if (pstmt != null) pstmt.close(); if (conn != null) conn.close(); }
+                catch (SQLException e) { e.printStackTrace(); }
             }
         }
         %>
-        <div class="message <%= messageClass %>"><%= message %></div>
-        <a href="BookingDetails.jsp?userId=<%= request.getParameter("userId") %>">Back to Booking Details</a>
     </div>
 </body>
 </html>

@@ -10,7 +10,7 @@
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
-            background-image: url(images/back.png); /* Optional: Keep the background image if desired */
+            background-image: url(images/back.png);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -18,134 +18,137 @@
             flex-direction: column;
         }
         .container {
-            max-width: 1000px; /* Match the width in your image */
-            background-color: #ffffff; /* White background for the container */
-            padding: 30px;
-            border-radius: 12px; /* Rounded corners like in your image */
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-            border: 1px solid #e0e0e0; /* Light border for definition */
-            overflow-x: auto; /* Enable horizontal scrolling if table overflows */
-            margin-top: 20px; /* Space from the top */
+            max-width: 600px; /* Reduced from 1000px */
+            background-color: #ffffff;
+            padding: 15px; /* Reduced from 30px */
+            border-radius: 8px; /* Slightly smaller radius */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Smaller shadow */
+            border: 1px solid #e0e0e0;
+            margin-top: 10px; /* Reduced from 20px */
         }
         .header {
             text-align: center;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #f5f5f5; /* Light gray bottom border for header */
+            padding-bottom: 10px; /* Reduced from 20px */
+            border-bottom: 1px solid #f5f5f5; /* Thinner border */
         }
         .header h1 {
             color: #1a73e8;
-            font-size: 28px;
+            font-size: 20px; /* Reduced from 28px */
             margin: 0;
         }
         .input-form {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 10px; /* Reduced from 20px */
         }
         .input-form label {
             font-weight: 600;
             color: #444;
-            margin-right: 10px;
+            margin-right: 5px; /* Reduced from 10px */
+            font-size: 14px; /* Smaller font */
         }
         .input-form input {
-            padding: 8px;
+            padding: 5px; /* Reduced from 8px */
             border: 1px solid #e0e0e0;
-            border-radius: 4px;
-            font-size: 16px;
+            border-radius: 3px; /* Slightly smaller radius */
+            font-size: 14px; /* Reduced from 16px */
         }
         .input-form button {
-            padding: 8px 15px;
+            padding: 5px 10px; /* Reduced from 8px 15px */
             border: none;
-            border-radius: 5px;
-            background-color: #4CAF50; /* Green */
+            border-radius: 3px;
+            background-color: #4CAF50;
             color: white;
             cursor: pointer;
             transition: background-color 0.3s ease;
             font-weight: bold;
+            font-size: 14px; /* Reduced from default */
         }
         .input-form button:hover {
             background-color: #45a049;
         }
-        table {
-            width: 100%;
-            max-width: 100%; /* Ensure table doesn't exceed container */
-            border-collapse: collapse;
-            margin-top: 20px;
-            font-size: 16px;
-            color: #333;
-            table-layout: auto; /* Allow table columns to adjust naturally */
-            background-color: #ffffff; /* White background for the table */
-            border-radius: 8px; /* Optional: Rounded corners for the table */
+        .booking-card {
+            background-color: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px; /* Reduced from 8px */
+            padding: 10px; /* Reduced from 15px */
+            margin-bottom: 10px; /* Reduced from 20px */
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Smaller shadow */
         }
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #f0f0f0; /* Light gray border for rows */
-            white-space: nowrap; /* Prevent text wrapping to keep table compact */
+        .booking-field {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 5px; /* Reduced from 10px */
         }
-        th {
-            background-color: #ffd407; /* Yellow header as in your image */
-            color: #000;
+        .booking-field label {
             font-weight: 600;
+            color: #444;
+            margin-bottom: 3px; /* Reduced from 5px */
+            font-size: 12px; /* Reduced font size */
         }
-        tr:nth-child(even) {
-            background-color: #f9f9f9; /* Light gray for even rows */
-        }
-        tr:hover {
-            background-color: #f5f5f5; /* Lighter gray on hover */
+        .booking-field span {
+            padding: 3px; /* Reduced from 5px */
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            word-wrap: break-word;
+            font-size: 12px; /* Reduced font size */
         }
         .cancel-button {
-            padding: 5px 10px;
+            padding: 5px 10px; /* Reduced from 8px 15px */
             border: none;
-            border-radius: 4px;
-            background-color: #f44336; /* Red for cancellation */
+            border-radius: 3px;
+            background-color: #f44336;
             color: white;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            font-size: 14px;
+            font-size: 12px; /* Reduced from 14px */
             font-weight: bold;
+            width: 100%;
+            max-width: 150px; /* Reduced from 200px */
+            margin-top: 5px; /* Reduced from 10px */
         }
         .cancel-button:hover {
-            background-color: #da190b; /* Darker red on hover */
+            background-color: #da190b;
         }
         .no-data {
             text-align: center;
             color: #666;
             font-weight: 500;
-            margin-top: 20px;
+            margin-top: 10px; /* Reduced from 20px */
+            font-size: 14px; /* Reduced font size */
         }
         .error-message {
             text-align: center;
             color: #d32f2f;
             font-weight: 500;
-            margin-top: 20px;
+            margin-top: 10px; /* Reduced from 20px */
+            font-size: 14px; /* Reduced font size */
         }
-        /* Responsive Design */
         @media screen and (max-width: 600px) {
             .container {
                 width: 90%;
-                margin: 10px;
-                padding: 15px;
+                margin: 5px; /* Reduced from 10px */
+                padding: 10px; /* Reduced from 15px */
             }
-            table {
-                width: 100%;
+            .booking-card {
+                padding: 8px; /* Reduced from 10px */
             }
-            th, td {
-                padding: 10px;
-                font-size: 14px;
-            }
-            .header h1 {
-                font-size: 24px;
-            }
-            .input-form {
-                margin-bottom: 15px;
-            }
-            .input-form input, .input-form button {
-                font-size: 14px;
-                padding: 6px;
+            .booking-field label, .booking-field span {
+                font-size: 10px; /* Further reduced for mobile */
             }
             .cancel-button {
-                padding: 4px 8px;
-                font-size: 12px;
+                padding: 4px 8px; /* Reduced from 6px 12px */
+                font-size: 10px; /* Reduced from 12px */
+            }
+            .header h1 {
+                font-size: 18px; /* Reduced from 24px */
+            }
+            .input-form {
+                margin-bottom: 10px; /* Reduced from 15px */
+            }
+            .input-form input, .input-form button {
+                font-size: 12px; /* Reduced from 14px */
+                padding: 4px; /* Reduced from 6px */
             }
         }
     </style>
@@ -160,9 +163,8 @@
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String userId = request.getParameter("userId"); // Use userId as the parameter
+        String userId = request.getParameter("userId");
 
-        // If no userId is provided, show a form to input it
         if (userId == null || userId.trim().isEmpty()) {
         %>
         <div class="input-form">
@@ -178,15 +180,12 @@
         <%
         } else {
             try {
-                // Validate userId
                 userId = userId.trim();
 
-                // Load the JDBC driver
                 Class.forName("com.mysql.jdbc.Driver");
                 String url = "jdbc:mysql://localhost:3306/megacitycab?useSSL=false";
                 conn = DriverManager.getConnection(url, "root", "Himas123@#");
 
-                // Query the cab_bookings table for the specific userId
                 String sql = "SELECT id, name, phone, pickup_location, drop_location, car_type, booking_timestamp, status, driver_id, driver_name " +
                              "FROM cab_bookings WHERE userId = ? ORDER BY booking_timestamp DESC";
                 pstmt = conn.prepareStatement(sql);
@@ -194,22 +193,6 @@
                 rs = pstmt.executeQuery();
 
                 boolean hasBookings = false;
-            %>
-            <table>
-                <tr>
-                    <th>Booking ID</th>
-                    <th>Customer Name</th>
-                    <th>Phone</th>
-                    <th>Car Type</th>
-                    <th>Pickup Location</th>
-                    <th>Drop Location</th>
-                    <th>Booking Date</th>
-                    <th>Status</th>
-                    <th>Driver ID</th>
-                    <th>Driver Name</th>
-                    <th>Action</th> <!-- Added column for Cancel button -->
-                </tr>
-                <%
                 SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy, HH:mm:ss");
                 while (rs.next()) {
                     hasBookings = true;
@@ -225,37 +208,61 @@
                     String driverName = rs.getString("driver_name");
                     String formattedDate = (bookingTimestamp != null) ? sdf.format(bookingTimestamp) : "N/A";
                 %>
-                <tr>
-                    <td><%= bookingId %></td>
-                    <td><%= customerName != null ? customerName : "N/A" %></td>
-                    <td><%= phoneNumber != null ? phoneNumber : "N/A" %></td>
-                    <td><%= carType != null ? carType : "N/A" %></td>
-                    <td><%= pickupLocation != null ? pickupLocation : "N/A" %></td>
-                    <td><%= dropLocation != null ? dropLocation : "N/A" %></td>
-                    <td><%= formattedDate %></td>
-                    <td><%= status != null ? status : "N/A" %></td>
-                    <td><%= driverId != null ? driverId : "N/A" %></td>
-                    <td><%= driverName != null ? driverName : "N/A" %></td>
-                    <td>
-                        <form action="CancelBooking.jsp" method="post">
-                            <input type="hidden" name="bookingId" value="<%= bookingId %>">
-                            <input type="hidden" name="userId" value="<%= userId %>">
-                            <button type="submit" class="cancel-button">Cancel Booking</button>
-                        </form>
-                    </td>
-                </tr>
+                <div class="booking-card">
+                    <div class="booking-field">
+                        <label>Booking ID:</label>
+                        <span><%= bookingId %></span>
+                    </div>
+                    <div class="booking-field">
+                        <label>Customer Name:</label>
+                        <span><%= customerName != null ? customerName : "N/A" %></span>
+                    </div>
+                    <div class="booking-field">
+                        <label>Phone:</label>
+                        <span><%= phoneNumber != null ? phoneNumber : "N/A" %></span>
+                    </div>
+                    <div class="booking-field">
+                        <label>Car Type:</label>
+                        <span><%= carType != null ? carType : "N/A" %></span>
+                    </div>
+                    <div class="booking-field">
+                        <label>Pickup Location:</label>
+                        <span><%= pickupLocation != null ? pickupLocation : "N/A" %></span>
+                    </div>
+                    <div class="booking-field">
+                        <label>Drop Location:</label>
+                        <span><%= dropLocation != null ? dropLocation : "N/A" %></span>
+                    </div>
+                    <div class="booking-field">
+                        <label>Booking Date:</label>
+                        <span><%= formattedDate %></span>
+                    </div>
+                    <div class="booking-field">
+                        <label>Status:</label>
+                        <span><%= status != null ? status : "N/A" %></span>
+                    </div>
+                    <div class="booking-field">
+                        <label>Driver ID:</label>
+                        <span><%= driverId != null ? driverId : "N/A" %></span>
+                    </div>
+                    <div class="booking-field">
+                        <label>Driver Name:</label>
+                        <span><%= driverName != null ? driverName : "N/A" %></span>
+                    </div>
+                    <form action="CancelBooking.jsp" method="post">
+                        <input type="hidden" name="bookingId" value="<%= bookingId %>">
+                        <input type="hidden" name="userId" value="<%= userId %>">
+                    </form>
+                </div>
                 <%
                 }
                 if (!hasBookings) {
                 %>
-                <tr>
-                    <td colspan="11" class="no-data">No bookings available for User ID <%= userId %> at this time.</td>
-                </tr>
+                <div class="no-data">
+                    No bookings available for User ID <%= userId %> at this time.
+                </div>
                 <%
                 }
-                %>
-            </table>
-            <%
             } catch (Exception e) {
             %>
             <div class="error-message">

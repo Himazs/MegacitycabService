@@ -216,6 +216,7 @@
                             <input type="text" id="phone" name="phone" placeholder="Phone" required>
                             <input type="text" id="pickup" name="pickup" placeholder="Pickup Location (Colombo)" required>
                             <input type="text" id="drop" name="drop" placeholder="Drop Location (Colombo)" required>
+                             <input type="text" id="distance" name="distance" placeholder="Google Maps to calculate the distance." required>
                             <select id="carType" name="carType" required>
                                 <option value="standard">Economic Class Ride</option>
                                 <option value="premium">Premium Class Ride</option>

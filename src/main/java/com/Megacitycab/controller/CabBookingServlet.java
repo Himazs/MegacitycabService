@@ -1,7 +1,5 @@
 package com.Megacitycab.controller;
 
-
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,8 +10,6 @@ import com.Megacitycab.dao.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
-
 
 @WebServlet("/CabBookingServlet")
 public class CabBookingServlet extends HttpServlet {
@@ -34,16 +30,17 @@ public class CabBookingServlet extends HttpServlet {
             String pickupLocation = request.getParameter("pickup");
             String dropLocation = request.getParameter("drop");
             String carType = request.getParameter("carType");
-            String userid = request.getParameter("userid");  // Add userid parameter
+            String userid = request.getParameter("userid");
+            double distance = Double.parseDouble(request.getParameter("distance").replace(" km", "")); // Parse distance
 
-            CabBooking booking = new CabBooking(name, phone, pickupLocation, dropLocation, carType, userid);  // Pass userid to constructor
+            CabBooking booking = new CabBooking(name, phone, pickupLocation, dropLocation, carType, userid, distance);
 
             cabBookingDAO.saveBooking(booking);
 
-            response.sendRedirect("http://localhost:8080/Citycab/Megacitycab/booking-success.jsp"); // Redirect to a success page
+            response.sendRedirect("http://localhost:8080/Citycab/Megacitycab/booking-success.jsp"); // Redirect to success page
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("http://localhost:8080/Citycab/Megacitycab/booking-success.jsp"); // Redirect to an error page
+            response.sendRedirect("http://localhost:8080/Citycab/Megacitycab/booking-error.jsp"); // Redirect to error page
         }
     }
 }

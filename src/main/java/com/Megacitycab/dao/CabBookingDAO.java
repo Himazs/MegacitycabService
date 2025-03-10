@@ -11,10 +11,9 @@ public class CabBookingDAO {
     private String jdbcURL = "jdbc:mysql://localhost:3306/megacitycab?useSSL=false";
     private String jdbcUsername = "root";
     private String jdbcPassword = "Himas123@#";
-    private static final String INSERT_BOOKING_SQL = "INSERT INTO cab_bookings (name, phone, pickup_location, drop_location, car_type, userid) VALUES (?, ?, ?, ?, ?, ?)";
+    private static final String INSERT_BOOKING_SQL = "INSERT INTO cab_bookings (name, phone, pickup_location, drop_location, car_type, userid, distance) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     static {
-        // Load MySQL JDBC driver (optional, depending on your JDBC version)
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -34,7 +33,8 @@ public class CabBookingDAO {
             preparedStatement.setString(3, booking.getPickupLocation());
             preparedStatement.setString(4, booking.getDropLocation());
             preparedStatement.setString(5, booking.getCarType());
-            preparedStatement.setString(6, booking.getUserid());  // Add userid to the insert
+            preparedStatement.setString(6, booking.getUserid());
+            preparedStatement.setDouble(7, booking.getDistance()); // Add distance to insert
             System.out.println("Executing: " + preparedStatement);
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
